@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقارنة المنتجات - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .compare-table th, .compare-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .compare-table th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        
+        .compare-table tr:first-child th {
+            border-top: none;
+        }
+        
+        .compare-table tr:first-child th:first-child {
+            border-top: none;
+            border-left: none;
+            background-color: #fff;
+        }
+        
+        .compare-table .product-img {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+        
+        .compare-table .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .compare-table .product-name {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .compare-table .product-price {
+            color: #d35400;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .compare-table .btn {
+            margin-top: 10px;
+        }
+        
+        .compare-table .remove-btn {
+            background: none;
+            border: none;
+            color: #d35400;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+        }
+        
+        .empty-compare {
+            text-align: center;
+            padding: 50px 0;
+        }
+        
+        .empty-compare i {
+            font-size: 60px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .empty-compare h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html" class="favorites-icon">
+                            <i class="fas fa-heart"></i>
+                            <span class="favorites-count">0</span>
+                        </a>
+                    </li>
+                    <li class="search-container">
+                        <form action="search-results.html" method="get" class="search-form">
+                            <input type="text" name="query" placeholder="ابحث عن منتج..." class="search-input">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Compare Section -->
+    <section class="cart-page">
+        <div class="container">
+            <div class="section-title">
+                <h2>مقارنة المنتجات</h2>
+                <p>قارن بين المنتجات لاختيار الأنسب لك</p>
+            </div>
+            
+            <div id="compare-container">
+                <!-- Compare table will be added dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>أحذية أنيقة</h3>
+                    <p style="color: #ddd; margin-bottom: 20px;">
+                        متجرك المفضل للأحذية العصرية والأنيقة بأسعار تنافسية
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدمة العملاء</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> شارع محمد الخامس، الدار البيضاء، المغرب</li>
+                        <li><i class="fas fa-phone" style="margin-left: 10px;"></i> +212 522 123 456</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 10px;"></i> info@moroccanshoes.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const compareContainer = document.getElementById('compare-container');
+            let compareList = JSON.parse(localStorage.getItem('compareList')) || [];
+            
+            // Display compare table
+            function displayCompareTable() {
+                if (compareList.length === 0) {
+                    compareContainer.innerHTML = `
+                        <div class="empty-compare">
+                            <i class="fas fa-exchange-alt"></i>
+                            <h2>لا توجد منتجات للمقارنة</h2>
+                            <p>لم تقم بإضافة أي منتجات للمقارنة بعد.</p>
+                            <a href="products.html" class="btn" style="margin-top: 20px;">تسوق الآن</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Get products data
+                const compareProducts = compareList.map(id => products.find(p => p.id === id)).filter(p => p);
+                
+                // Create table
+                let html = '<table class="compare-table">';
+                
+                // Product images and names
+                html += '<tr><th></th>';
+                compareProducts.forEach(product => {
+                    html += `
+                        <th>
+                            <div class="product-img">
+                                <img src="${product.image}" alt="${product.name}">
+                            </div>
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-price">${product.price} درهم</div>
+                            <a href="product-details.html?id=${product.id}" class="btn">عرض التفاصيل</a>
+                            <button class="remove-btn" data-id="${product.id}">إزالة</button>
+                        </th>
+                    `;
+                });
+                html += '</tr>';
+                
+                // Price
+                html += '<tr><th>السعر</th>';
+                compareProducts.forEach(product => {
+                    html += `<td>${product.price} درهم</td>`;
+                });
+                html += '</tr>';
+                
+                // Description
+                html += '<tr><th>الوصف</th>';
+                compareProducts.forEach(product => {
+                    html += `<td>${product.description.substring(0, 100)}...</td>`;
+                });
+                html += '</tr>';
+                
+                // Sizes
+                html += '<tr><th>المقاسات المتوفرة</th>';
+                compareProducts.forEach(product => {
+                    html += `<td>${product.sizes.join(', ')}</td>`;
+                });
+                html += '</tr>';
+                
+                // Add to cart
+                html += '<tr><th>إضافة للسلة</th>';
+                compareProducts.forEach(product => {
+                    html += `
+                        <td>
+                            <button class="btn add-to-cart-btn" data-id="${product.id}">
+                                <i class="fas fa-shopping-cart"></i> إضافة للسلة
+                            </button>
+                        </td>
+                    `;
+                });
+                html += '</tr>';
+                
+                html += '</table>';
+                
+                compareContainer.innerHTML = html;
+                
+                // Add event listeners
+                const removeButtons = compareContainer.querySelectorAll('.remove-btn');
+                removeButtons.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.dataset.id);
+                        compareList = compareList.filter(id => id !== productId);
+                        localStorage.setItem('compareList', JSON.stringify(compareList));
+                        displayCompareTable();
+                    });
+                });
+                
+                const addToCartButtons = compareContainer.querySelectorAll('.add-to-cart-btn');
+                addToCartButtons.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.dataset.id);
+                        const product = products.find(p => p.id === productId);
+                        if (product) {
+                            addToCart(product, product.sizes[0], 1);
+                        }
+                    });
+                });
+            }
+            
+            // Initialize
+            displayCompareTable();
+        });
+    </script>
+</body>
+</html>

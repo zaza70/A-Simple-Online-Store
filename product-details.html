@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .product-details-tabs {
+            margin-top: 40px;
+        }
+
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            border-bottom-color: #d35400;
+            color: #d35400;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .reviews {
+            margin-top: 20px;
+        }
+
+        .review {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-weight: bold;
+        }
+
+        .review-rating {
+            color: #d35400;
+        }
+
+        .related-products {
+            margin-top: 60px;
+        }
+
+        /* Social Share Buttons */
+        .social-share {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-share-title {
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        .social-share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-share-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-share-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .facebook {
+            background-color: #3b5998;
+        }
+
+        .twitter {
+            background-color: #1da1f2;
+        }
+
+        .whatsapp {
+            background-color: #25d366;
+        }
+
+        .telegram {
+            background-color: #0088cc;
+        }
+
+        .copy-link {
+            background-color: #333;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <section class="product-details">
+        <div class="container">
+            <div id="product-details-container"></div>
+
+            <!-- Social Share Buttons -->
+            <div class="social-share">
+                <div class="social-share-title">مشاركة المنتج:</div>
+                <div class="social-share-buttons">
+                    <a class="social-share-button facebook" id="share-facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="social-share-button twitter" id="share-twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="social-share-button whatsapp" id="share-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a class="social-share-button telegram" id="share-telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <a class="social-share-button copy-link" id="copy-link">
+                        <i class="fas fa-link"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Toast Notification -->
+            <div class="toast" id="toast-notification">تم نسخ الرابط!</div>
+
+            <div class="product-details-tabs">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" data-tab="description">الوصف</button>
+                    <button class="tab-btn" data-tab="specifications">المواصفات</button>
+                    <button class="tab-btn" data-tab="reviews">التقييمات</button>
+                </div>
+
+                <div class="tab-content active" id="description">
+                    <p>
+                        حذاء عالي الجودة مصمم خصيصًا لتوفير الراحة والأناقة. يتميز بتصميم عصري يناسب مختلف الأذواق والمناسبات.
+                    </p>
+                    <p>
+                        مصنوع من مواد عالية الجودة تضمن المتانة والراحة طوال اليوم. الحذاء مناسب للاستخدام اليومي ويمكن ارتداؤه في مختلف المناسبات.
+                    </p>
+                    <p>
+                        يتميز بنعل مريح يوفر دعمًا جيدًا للقدم ويقلل من الإجهاد أثناء المشي لفترات طويلة.
+                    </p>
+                </div>
+
+                <div class="tab-content" id="specifications">
+                    <ul style="list-style: disc; padding-right: 20px;">
+                        <li>المادة الخارجية: جلد طبيعي / قماش</li>
+                        <li>النعل: مطاط</li>
+                        <li>البطانة: قماش</li>
+                        <li>الارتفاع: منخفض</li>
+                        <li>نوع الإغلاق: رباط</li>
+                        <li>مقاوم للماء: لا</li>
+                        <li>مناسب للاستخدام: يومي / رياضي</li>
+                        <li>بلد المنشأ: المغرب</li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="reviews">
+                    <div class="reviews">
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="review-author">أحمد محمد</div>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="review-date">15 يناير 2025</div>
+                            <div class="review-content">
+                                <p>حذاء رائع جدًا! مريح للغاية ويبدو أنيقًا. أنصح به بشدة.</p>
+                            </div>
+                        </div>
+
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="review-author">سارة أحمد</div>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <div class="review-date">3 فبراير 2025</div>
+                            <div class="review-content">
+                                <p>جودة ممتازة وسعر معقول. المقاس مناسب تمامًا.</p>
+                            </div>
+                        </div>
+
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="review-author">محمد علي</div>
+                                <div class="review-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                            <div class="review-date">20 فبراير 2025</div>
+                            <div class="review-content">
+                                <p>حذاء جميل جدًا ومريح. التوصيل كان سريعًا والتعبئة ممتازة. سأشتري منكم مرة أخرى بالتأكيد.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <h3 style="margin-bottom: 15px;">أضف تقييمك</h3>
+                        <form id="review-form" onsubmit="return submitReview(event)">
+                            <div style="margin-bottom: 15px;" class="form-group">
+                                <label for="review-name" style="display: block; margin-bottom: 5px;">الاسم *</label>
+                                <input type="text" id="review-name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                                <div class="error-message" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                            </div>
+                            <div style="margin-bottom: 15px;" class="form-group">
+                                <label for="review-email" style="display: block; margin-bottom: 5px;">البريد الإلكتروني *</label>
+                                <input type="email" id="review-email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                                <div class="error-message" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                            </div>
+                            <div style="margin-bottom: 15px;" class="form-group">
+                                <label for="review-rating" style="display: block; margin-bottom: 5px;">التقييم *</label>
+                                <div class="star-rating" style="direction: ltr; display: inline-block; font-size: 24px; cursor: pointer;">
+                                    <i class="far fa-star" data-rating="1"></i>
+                                    <i class="far fa-star" data-rating="2"></i>
+                                    <i class="far fa-star" data-rating="3"></i>
+                                    <i class="far fa-star" data-rating="4"></i>
+                                    <i class="far fa-star" data-rating="5"></i>
+                                </div>
+                                <input type="hidden" id="review-rating" value="0" required>
+                                <div class="error-message" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                            </div>
+                            <div style="margin-bottom: 15px;" class="form-group">
+                                <label for="review-title" style="display: block; margin-bottom: 5px;">عنوان التقييم *</label>
+                                <input type="text" id="review-title" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required>
+                                <div class="error-message" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                            </div>
+                            <div style="margin-bottom: 15px;" class="form-group">
+                                <label for="review-comment" style="display: block; margin-bottom: 5px;">التعليق *</label>
+                                <textarea id="review-comment" rows="5" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;" required></textarea>
+                                <div class="error-message" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                            </div>
+                            <div style="margin-bottom: 15px;" class="form-group">
+                                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                    <input type="checkbox" id="review-consent" required>
+                                    <span>أوافق على <a href="privacy-policy.html" target="_blank">سياسة الخصوصية</a> و <a href="terms.html" target="_blank">الشروط والأحكام</a> *</span>
+                                </label>
+                                <div class="error-message" style="color: #e74c3c; font-size: 12px; margin-top: 5px; display: none;"></div>
+                            </div>
+                            <button type="submit" class="btn">إرسال التقييم</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="related-products">
+                <div class="section-title">
+                    <h2>منتجات ذات صلة</h2>
+                    <p>قد تعجبك أيضًا</p>
+                </div>
+                <div class="products-grid">
+                    <!-- Related products will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>أحذية أنيقة</h3>
+                    <p style="color: #ddd; margin-bottom: 20px;">
+                        متجرك المفضل للأحذية العصرية والأنيقة بأسعار تنافسية
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدمة العملاء</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> شارع محمد الخامس، الدار البيضاء، المغرب</li>
+                        <li><i class="fas fa-phone" style="margin-left: 10px;"></i> +212 522 123 456</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 10px;"></i> info@moroccanshoes.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Reviews data
+        let productReviews = JSON.parse(localStorage.getItem('productReviews')) || {};
+
+        // Format date
+        function formatDate(date) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(date).toLocaleDateString('ar-EG', options);
+        }
+
+        // Show form error
+        function showReviewError(input, message) {
+            const formGroup = input.closest('.form-group');
+            const errorElement = formGroup.querySelector('.error-message');
+
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+
+            if (input.type !== 'checkbox') {
+                input.style.borderColor = '#e74c3c';
+            }
+        }
+
+        // Hide form error
+        function hideReviewError(input) {
+            const formGroup = input.closest('.form-group');
+            const errorElement = formGroup.querySelector('.error-message');
+
+            errorElement.textContent = '';
+            errorElement.style.display = 'none';
+
+            if (input.type !== 'checkbox') {
+                input.style.borderColor = '#ddd';
+            }
+        }
+
+        // Submit review
+        function submitReview(event) {
+            event.preventDefault();
+
+            let isValid = true;
+
+            // Get form elements
+            const nameInput = document.getElementById('review-name');
+            const emailInput = document.getElementById('review-email');
+            const ratingInput = document.getElementById('review-rating');
+            const titleInput = document.getElementById('review-title');
+            const commentInput = document.getElementById('review-comment');
+            const consentInput = document.getElementById('review-consent');
+
+            // Validate name
+            if (!nameInput.value.trim()) {
+                showReviewError(nameInput, 'الرجاء إدخال الاسم');
+                isValid = false;
+            } else if (nameInput.value.trim().length < 3) {
+                showReviewError(nameInput, 'الاسم يجب أن يكون 3 أحرف على الأقل');
+                isValid = false;
+            } else {
+                hideReviewError(nameInput);
+            }
+
+            // Validate email
+            if (!emailInput.value.trim()) {
+                showReviewError(emailInput, 'الرجاء إدخال البريد الإلكتروني');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+                showReviewError(emailInput, 'الرجاء إدخال بريد إلكتروني صحيح');
+                isValid = false;
+            } else {
+                hideReviewError(emailInput);
+            }
+
+            // Validate rating
+            if (parseInt(ratingInput.value) === 0) {
+                showReviewError(ratingInput, 'الرجاء اختيار تقييم');
+                isValid = false;
+            } else {
+                hideReviewError(ratingInput);
+            }
+
+            // Validate title
+            if (!titleInput.value.trim()) {
+                showReviewError(titleInput, 'الرجاء إدخال عنوان للتقييم');
+                isValid = false;
+            } else if (titleInput.value.trim().length < 3) {
+                showReviewError(titleInput, 'العنوان يجب أن يكون 3 أحرف على الأقل');
+                isValid = false;
+            } else {
+                hideReviewError(titleInput);
+            }
+
+            // Validate comment
+            if (!commentInput.value.trim()) {
+                showReviewError(commentInput, 'الرجاء إدخال تعليق');
+                isValid = false;
+            } else if (commentInput.value.trim().length < 10) {
+                showReviewError(commentInput, 'التعليق يجب أن يكون 10 أحرف على الأقل');
+                isValid = false;
+            } else {
+                hideReviewError(commentInput);
+            }
+
+            // Validate consent
+            if (!consentInput.checked) {
+                showReviewError(consentInput, 'يجب الموافقة على سياسة الخصوصية والشروط والأحكام');
+                isValid = false;
+            } else {
+                hideReviewError(consentInput);
+            }
+
+            // If form is valid, save review
+            if (isValid) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const productId = parseInt(urlParams.get('id'));
+
+                // Create review object
+                const review = {
+                    id: Date.now(),
+                    productId: productId,
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    rating: parseInt(ratingInput.value),
+                    title: titleInput.value.trim(),
+                    comment: commentInput.value.trim(),
+                    date: new Date().toISOString()
+                };
+
+                // Add review to product reviews
+                if (!productReviews[productId]) {
+                    productReviews[productId] = [];
+                }
+
+                productReviews[productId].unshift(review);
+
+                // Save to localStorage
+                localStorage.setItem('productReviews', JSON.stringify(productReviews));
+
+                // Reset form
+                document.getElementById('review-form').reset();
+
+                // Reset star rating
+                const stars = document.querySelectorAll('.star-rating i');
+                stars.forEach(star => {
+                    star.className = 'far fa-star';
+                });
+                ratingInput.value = '0';
+
+                // Refresh reviews
+                displayProductReviews(productId);
+
+                // Show success message
+                alert('تم إضافة تقييمك بنجاح! شكرًا لك.');
+            }
+
+            return false;
+        }
+
+        // Display product reviews
+        function displayProductReviews(productId) {
+            const reviewsContainer = document.querySelector('.reviews');
+
+            // Get product reviews
+            const reviews = productReviews[productId] || [];
+
+            if (reviews.length === 0) {
+                reviewsContainer.innerHTML = '<p>لا توجد تقييمات لهذا المنتج حتى الآن. كن أول من يقيم هذا المنتج!</p>';
+                return;
+            }
+
+            let html = '';
+
+            reviews.forEach(review => {
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= review.rating) {
+                        starsHtml += '<i class="fas fa-star"></i>';
+                    } else {
+                        starsHtml += '<i class="far fa-star"></i>';
+                    }
+                }
+
+                html += `
+                    <div class="review">
+                        <div class="review-header">
+                            <div class="review-author">${review.name}</div>
+                            <div class="review-rating">
+                                ${starsHtml}
+                            </div>
+                        </div>
+                        <div class="review-date">${formatDate(review.date)}</div>
+                        <div class="review-title" style="font-weight: bold; margin: 10px 0;">${review.title}</div>
+                        <div class="review-content">
+                            <p>${review.comment}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            reviewsContainer.innerHTML = html;
+        }
+
+        // Tabs functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            // Star rating functionality
+            const stars = document.querySelectorAll('.star-rating i');
+            const ratingInput = document.getElementById('review-rating');
+
+            stars.forEach(star => {
+                star.addEventListener('mouseover', function() {
+                    const rating = parseInt(this.dataset.rating);
+
+                    stars.forEach(s => {
+                        const starRating = parseInt(s.dataset.rating);
+                        if (starRating <= rating) {
+                            s.className = 'fas fa-star';
+                        } else {
+                            s.className = 'far fa-star';
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseout', function() {
+                    const currentRating = parseInt(ratingInput.value);
+
+                    stars.forEach(s => {
+                        const starRating = parseInt(s.dataset.rating);
+                        if (starRating <= currentRating) {
+                            s.className = 'fas fa-star';
+                        } else {
+                            s.className = 'far fa-star';
+                        }
+                    });
+                });
+
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.dataset.rating);
+                    ratingInput.value = rating;
+
+                    stars.forEach(s => {
+                        const starRating = parseInt(s.dataset.rating);
+                        if (starRating <= rating) {
+                            s.className = 'fas fa-star';
+                        } else {
+                            s.className = 'far fa-star';
+                        }
+                    });
+                });
+            });
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+
+                    tabBtns.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Social Share Functionality
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                // Set up share URLs
+                const pageUrl = encodeURIComponent(window.location.href);
+                const pageTitle = encodeURIComponent(`${product.name} - أحذية أنيقة`);
+                const pageDescription = encodeURIComponent(product.description);
+                const pageImage = encodeURIComponent(window.location.origin + '/' + product.image);
+
+                // Facebook Share
+                document.getElementById('share-facebook').addEventListener('click', function() {
+                    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${pageTitle}`;
+                    window.open(facebookUrl, '_blank', 'width=600,height=400');
+                });
+
+                // Twitter Share
+                document.getElementById('share-twitter').addEventListener('click', function() {
+                    const twitterUrl = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+                    window.open(twitterUrl, '_blank', 'width=600,height=400');
+                });
+
+                // WhatsApp Share
+                document.getElementById('share-whatsapp').addEventListener('click', function() {
+                    const whatsappUrl = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
+                    window.open(whatsappUrl, '_blank');
+                });
+
+                // Telegram Share
+                document.getElementById('share-telegram').addEventListener('click', function() {
+                    const telegramUrl = `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
+                    window.open(telegramUrl, '_blank');
+                });
+
+                // Copy Link
+                document.getElementById('copy-link').addEventListener('click', function() {
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        const toast = document.getElementById('toast-notification');
+                        toast.classList.add('show');
+                        setTimeout(() => {
+                            toast.classList.remove('show');
+                        }, 3000);
+                    });
+                });
+            }
+
+            // Display related products
+            const relatedProductsGrid = document.querySelector('.related-products .products-grid');
+
+            // Get 4 random products that are not the current product
+            const relatedProducts = products
+                .filter(product => product.id !== productId)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 4);
+
+            let relatedHtml = '';
+
+            relatedProducts.forEach(product => {
+                relatedHtml += `
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <div class="product-price">${product.price} درهم</div>
+                            <a href="product-details.html?id=${product.id}" class="btn">عرض التفاصيل</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            relatedProductsGrid.innerHTML = relatedHtml;
+
+            // Initialize lazy loading for images
+            if (typeof initLazyLoading === 'function') {
+                initLazyLoading();
+            }
+
+            // Display product reviews
+            displayProductReviews(productId);
+        });
+    </script>
+</body>
+</html>

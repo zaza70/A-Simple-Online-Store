@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - أحذية أنيقة</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>أحذية أنيقة</h2>
+                <p>لوحة التحكم</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="index.html"><i class="fas fa-tachometer-alt"></i> الرئيسية</a>
+                    </li>
+                    <li>
+                        <a href="products.html"><i class="fas fa-box"></i> المنتجات</a>
+                    </li>
+                    <li>
+                        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+                    </li>
+                    <li>
+                        <a href="users.html"><i class="fas fa-users"></i> المستخدمين</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html"><i class="fas fa-warehouse"></i> المخزون</a>
+                    </li>
+                    <li>
+                        <a href="coupons.html"><i class="fas fa-tags"></i> الكوبونات</a>
+                    </li>
+                    <li>
+                        <a href="analytics.html"><i class="fas fa-chart-bar"></i> التحليلات</a>
+                    </li>
+                    <li>
+                        <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> زيارة المتجر</a>
+                <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+                    <h1>لوحة التحكم</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <img src="img/admin-avatar.png" alt="Admin Avatar">
+                        <span>مرحبًا، المدير</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Dashboard Overview -->
+                <div class="dashboard-overview">
+                    <div class="stats-cards">
+                        <div class="stats-card">
+                            <div class="stats-card-icon" style="background-color: #3498db;">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stats-card-content">
+                                <h3>الطلبات</h3>
+                                <p class="stats-card-value" id="orders-count">0</p>
+                                <p class="stats-card-label">إجمالي الطلبات</p>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stats-card-icon" style="background-color: #2ecc71;">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stats-card-content">
+                                <h3>المبيعات</h3>
+                                <p class="stats-card-value" id="sales-total">0 درهم</p>
+                                <p class="stats-card-label">إجمالي المبيعات</p>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stats-card-icon" style="background-color: #9b59b6;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stats-card-content">
+                                <h3>المستخدمين</h3>
+                                <p class="stats-card-value" id="users-count">0</p>
+                                <p class="stats-card-label">إجمالي المستخدمين</p>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stats-card-icon" style="background-color: #e74c3c;">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stats-card-content">
+                                <h3>المنتجات</h3>
+                                <p class="stats-card-value" id="products-count">0</p>
+                                <p class="stats-card-label">إجمالي المنتجات</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-row">
+                        <!-- Recent Orders -->
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h2>أحدث الطلبات</h2>
+                                <a href="orders.html" class="view-all">عرض الكل</a>
+                            </div>
+                            <div class="card-body">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>رقم الطلب</th>
+                                            <th>العميل</th>
+                                            <th>التاريخ</th>
+                                            <th>المبلغ</th>
+                                            <th>الحالة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recent-orders">
+                                        <!-- Will be filled by JS -->
+                                        <tr>
+                                            <td colspan="5" class="text-center">جاري التحميل...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Low Stock Alert -->
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h2>تنبيهات المخزون</h2>
+                                <a href="inventory.html" class="view-all">عرض الكل</a>
+                            </div>
+                            <div class="card-body">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>المنتج</th>
+                                            <th>الكمية المتبقية</th>
+                                            <th>الحالة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="low-stock-products">
+                                        <!-- Will be filled by JS -->
+                                        <tr>
+                                            <td colspan="3" class="text-center">جاري التحميل...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-row">
+                        <!-- Sales Chart -->
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h2>إحصائيات المبيعات</h2>
+                                <div class="chart-period">
+                                    <button class="period-btn active" data-period="week">أسبوع</button>
+                                    <button class="period-btn" data-period="month">شهر</button>
+                                    <button class="period-btn" data-period="year">سنة</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="sales-chart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Top Products -->
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h2>المنتجات الأكثر مبيعًا</h2>
+                                <a href="analytics.html" class="view-all">عرض الكل</a>
+                            </div>
+                            <div class="card-body">
+                                <div id="top-products">
+                                    <!-- Will be filled by JS -->
+                                    <div class="loading">جاري التحميل...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

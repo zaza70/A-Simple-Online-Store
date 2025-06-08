@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المصادقة الثنائية - أحذية أنيقة</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .auth-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .auth-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .auth-card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .auth-method {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .auth-method:hover {
+            border-color: #3498db;
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .auth-method.active {
+            border-color: #3498db;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .auth-method-icon {
+            font-size: 24px;
+            margin-left: 15px;
+            color: #3498db;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .auth-method-info {
+            flex: 1;
+        }
+        
+        .auth-method-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .auth-method-description {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .auth-method-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-enabled {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #2ecc71;
+        }
+        
+        .status-disabled {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+        
+        .qr-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .secret-key {
+            font-family: monospace;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+        
+        .verification-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .verification-code {
+            letter-spacing: 5px;
+            font-size: 18px;
+            text-align: center;
+            font-family: monospace;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e5e5e5;
+        }
+        
+        .btn-danger {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .auth-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .recovery-codes {
+            margin-top: 20px;
+        }
+        
+        .recovery-codes-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .recovery-code {
+            font-family: monospace;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .steps {
+            margin: 20px 0;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-left: 10px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>أحذية أنيقة</h2>
+                <p>لوحة التحكم</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html"><i class="fas fa-tachometer-alt"></i> الرئيسية</a>
+                    </li>
+                    <li>
+                        <a href="products.html"><i class="fas fa-box"></i> المنتجات</a>
+                    </li>
+                    <li>
+                        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+                    </li>
+                    <li>
+                        <a href="users.html"><i class="fas fa-users"></i> المستخدمين</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html"><i class="fas fa-warehouse"></i> المخزون</a>
+                    </li>
+                    <li>
+                        <a href="coupons.html"><i class="fas fa-tags"></i> الكوبونات</a>
+                    </li>
+                    <li>
+                        <a href="analytics.html"><i class="fas fa-chart-bar"></i> التحليلات</a>
+                    </li>
+                    <li>
+                        <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> زيارة المتجر</a>
+                <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+                    <h1>المصادقة الثنائية</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <img src="img/admin-avatar.png" alt="Admin Avatar">
+                        <span>مرحبًا، المدير</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>طرق المصادقة الثنائية</h2>
+                        <p>المصادقة الثنائية توفر طبقة إضافية من الأمان لحسابك. عند تفعيلها، ستحتاج إلى إدخال رمز إضافي عند تسجيل الدخول.</p>
+                        
+                        <div class="auth-method active" id="app-method">
+                            <div class="auth-method-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="auth-method-info">
+                                <div class="auth-method-title">تطبيق المصادقة</div>
+                                <div class="auth-method-description">استخدم تطبيق مثل Google Authenticator أو Authy للحصول على رموز المصادقة</div>
+                            </div>
+                            <div class="auth-method-status status-disabled">غير مفعل</div>
+                        </div>
+                        
+                        <div class="auth-method" id="sms-method">
+                            <div class="auth-method-icon">
+                                <i class="fas fa-sms"></i>
+                            </div>
+                            <div class="auth-method-info">
+                                <div class="auth-method-title">الرسائل النصية</div>
+                                <div class="auth-method-description">استلم رموز المصادقة عبر رسائل SMS على هاتفك</div>
+                            </div>
+                            <div class="auth-method-status status-disabled">غير مفعل</div>
+                        </div>
+                        
+                        <div class="auth-method" id="email-method">
+                            <div class="auth-method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="auth-method-info">
+                                <div class="auth-method-title">البريد الإلكتروني</div>
+                                <div class="auth-method-description">استلم رموز المصادقة عبر البريد الإلكتروني</div>
+                            </div>
+                            <div class="auth-method-status status-disabled">غير مفعل</div>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-card" id="app-setup">
+                        <h2>إعداد تطبيق المصادقة</h2>
+                        
+                        <div class="steps">
+                            <div class="step">
+                                <span class="step-number">1</span>
+                                <span>قم بتنزيل وتثبيت تطبيق المصادقة على هاتفك الذكي:</span>
+                                <div style="margin: 10px 35px;">
+                                    <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank" class="btn btn-secondary">Google Authenticator (Android)</a>
+                                    <a href="https://apps.apple.com/us/app/google-authenticator/id388497605" target="_blank" class="btn btn-secondary">Google Authenticator (iOS)</a>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-number">2</span>
+                                <span>افتح التطبيق وامسح رمز QR التالي:</span>
+                            </div>
+                        </div>
+                        
+                        <div class="qr-container">
+                            <div class="qr-code">
+                                <img src="img/qr-code-example.png" alt="QR Code">
+                            </div>
+                            <p>أو أدخل المفتاح السري التالي يدويًا:</p>
+                            <div class="secret-key">ABCD EFGH IJKL MNOP</div>
+                        </div>
+                        
+                        <div class="verification-form">
+                            <div class="form-group">
+                                <label for="verification-code">أدخل رمز التحقق من التطبيق:</label>
+                                <input type="text" id="verification-code" class="form-control verification-code" maxlength="6" placeholder="000000">
+                            </div>
+                            
+                            <div class="auth-footer">
+                                <button type="button" class="btn btn-secondary" id="cancel-setup">إلغاء</button>
+                                <button type="button" class="btn btn-primary" id="verify-code">تحقق وتفعيل</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-card" id="recovery-codes" style="display: none;">
+                        <h2>رموز الاسترداد</h2>
+                        <p>احتفظ بهذه الرموز في مكان آمن. يمكنك استخدامها لتسجيل الدخول في حال فقدت الوصول إلى جهاز المصادقة الخاص بك.</p>
+                        
+                        <div class="recovery-codes-list">
+                            <div class="recovery-code">ABCD-EFGH-IJKL</div>
+                            <div class="recovery-code">MNOP-QRST-UVWX</div>
+                            <div class="recovery-code">YZAB-CDEF-GHIJ</div>
+                            <div class="recovery-code">KLMN-OPQR-STUV</div>
+                            <div class="recovery-code">WXYZ-ABCD-EFGH</div>
+                            <div class="recovery-code">IJKL-MNOP-QRST</div>
+                            <div class="recovery-code">UVWX-YZAB-CDEF</div>
+                            <div class="recovery-code">GHIJ-KLMN-OPQR</div>
+                        </div>
+                        
+                        <div class="auth-footer">
+                            <button type="button" class="btn btn-secondary" id="print-codes">طباعة الرموز</button>
+                            <button type="button" class="btn btn-primary" id="download-codes">تنزيل الرموز</button>
+                            <button type="button" class="btn btn-primary" id="finish-setup">إنهاء الإعداد</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/two-factor-auth.js"></script>
+</body>
+</html>

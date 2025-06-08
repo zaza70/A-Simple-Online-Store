@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        .profile-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            display: flex;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-info h2 {
+            margin: 0 0 10px 0;
+        }
+        
+        .profile-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .profile-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .profile-tab.active {
+            border-bottom: 2px solid #3498db;
+            color: #3498db;
+        }
+        
+        .profile-tab:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .profile-content {
+            padding: 30px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .profile-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .profile-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .profile-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .profile-form .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+        }
+        
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .order-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-id {
+            font-weight: bold;
+        }
+        
+        .order-date {
+            color: #666;
+        }
+        
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #ffeaa7;
+            color: #d35400;
+        }
+        
+        .status-processing {
+            background-color: #81ecec;
+            color: #00b894;
+        }
+        
+        .status-shipped {
+            background-color: #74b9ff;
+            color: #0984e3;
+        }
+        
+        .status-delivered {
+            background-color: #55efc4;
+            color: #00b894;
+        }
+        
+        .status-cancelled {
+            background-color: #fab1a0;
+            color: #d63031;
+        }
+        
+        .order-products {
+            margin-bottom: 15px;
+        }
+        
+        .order-product {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .order-product-img {
+            width: 60px;
+            height: 60px;
+            margin-left: 15px;
+        }
+        
+        .order-product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .order-product-info {
+            flex: 1;
+        }
+        
+        .order-product-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .order-product-details {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .order-total {
+            text-align: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .order-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .track-order-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .track-order-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .reorder-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .reorder-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .no-orders {
+            text-align: center;
+            padding: 50px 0;
+            color: #777;
+        }
+        
+        .no-orders i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+        
+        .address-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .address-card.default {
+            border-color: #3498db;
+        }
+        
+        .address-default-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .address-actions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        
+        .address-actions button {
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .address-actions button:hover {
+            color: #333;
+        }
+        
+        .add-address-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-address-btn:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .add-address-btn i {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html" class="favorites-icon">
+                            <i class="far fa-heart"></i>
+                            <span class="favorites-count">0</span>
+                        </a>
+                    </li>
+                    <li class="user-menu">
+                        <a href="#" id="user-menu-toggle">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="profile.html">الملف الشخصي</a>
+                            <a href="orders.html">طلباتي</a>
+                            <a href="#" id="logout-btn">تسجيل الخروج</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profile-avatar">
+                        <!-- Will be filled by JS -->
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profile-name"><!-- Will be filled by JS --></h2>
+                        <p id="profile-email"><!-- Will be filled by JS --></p>
+                        <p id="profile-phone"><!-- Will be filled by JS --></p>
+                        <p>عضو منذ <span id="profile-member-since"><!-- Will be filled by JS --></span></p>
+                    </div>
+                </div>
+                
+                <div class="profile-tabs">
+                    <div class="profile-tab active" data-tab="orders">طلباتي</div>
+                    <div class="profile-tab" data-tab="addresses">العناوين</div>
+                    <div class="profile-tab" data-tab="account">إعدادات الحساب</div>
+                </div>
+                
+                <div class="profile-content">
+                    <!-- Orders Tab -->
+                    <div class="tab-content active" id="orders">
+                        <h3>طلباتي</h3>
+                        <div id="orders-container">
+                            <!-- Will be filled by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Addresses Tab -->
+                    <div class="tab-content" id="addresses">
+                        <h3>العناوين</h3>
+                        <div id="addresses-container">
+                            <!-- Will be filled by JS -->
+                        </div>
+                        <button class="add-address-btn" id="add-address-btn">
+                            <i class="fas fa-plus"></i> إضافة عنوان جديد
+                        </button>
+                    </div>
+                    
+                    <!-- Account Settings Tab -->
+                    <div class="tab-content" id="account">
+                        <h3>إعدادات الحساب</h3>
+                        <form id="profile-form" class="profile-form">
+                            <div class="form-group">
+                                <label for="profile-fullname">الاسم الكامل</label>
+                                <input type="text" id="profile-fullname" name="fullname">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-email-input">البريد الإلكتروني</label>
+                                <input type="email" id="profile-email-input" name="email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="profile-phone-input">رقم الهاتف</label>
+                                <input type="tel" id="profile-phone-input" name="phone">
+                            </div>
+                            
+                            <button type="submit" class="btn">حفظ التغييرات</button>
+                        </form>
+                        
+                        <hr style="margin: 30px 0;">
+                        
+                        <h3>تغيير كلمة المرور</h3>
+                        <form id="change-password-form" class="profile-form">
+                            <div class="form-group">
+                                <label for="current-password">كلمة المرور الحالية</label>
+                                <input type="password" id="current-password" name="current-password">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="new-password">كلمة المرور الجديدة</label>
+                                <input type="password" id="new-password" name="new-password">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirm-new-password">تأكيد كلمة المرور الجديدة</label>
+                                <input type="password" id="confirm-new-password" name="confirm-new-password">
+                            </div>
+                            
+                            <button type="submit" class="btn">تغيير كلمة المرور</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>أحذية أنيقة</h2>
+                    <p>أفضل متجر للأحذية العصرية والأنيقة</p>
+                </div>
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                        <li><a href="privacy-policy.html">سياسة الخصوصية</a></li>
+                        <li><a href="terms.html">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>اتصل بنا</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> شارع الحسن الثاني، الرباط، المغرب</p>
+                    <p><i class="fas fa-phone"></i> +212-5XX-XXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@elegantshoes.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>تابعنا</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

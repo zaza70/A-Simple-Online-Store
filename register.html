@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب جديد - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .auth-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .auth-form input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .auth-form .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .auth-form .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .auth-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .auth-links a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-separator {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .auth-separator hr {
+            flex: 1;
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .auth-separator span {
+            padding: 0 10px;
+            color: #777;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            width: 100%;
+            border: none;
+        }
+        
+        .social-login-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .facebook-btn {
+            background-color: #3b5998;
+        }
+        
+        .google-btn {
+            background-color: #dd4b39;
+        }
+        
+        .password-strength {
+            margin-top: 5px;
+            height: 5px;
+            border-radius: 3px;
+            background-color: #eee;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            border-radius: 3px;
+            width: 0;
+            transition: width 0.3s, background-color 0.3s;
+        }
+        
+        .password-strength-text {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html" class="favorites-icon">
+                            <i class="far fa-heart"></i>
+                            <span class="favorites-count">0</span>
+                        </a>
+                    </li>
+                    <li class="user-menu">
+                        <a href="login.html">
+                            <i class="fas fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Register Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-title">
+                    <h2>إنشاء حساب جديد</h2>
+                    <p>انضم إلينا اليوم واستمتع بتجربة تسوق مميزة</p>
+                </div>
+                
+                <form id="register-form" class="auth-form" onsubmit="return registerUser(event)">
+                    <div class="form-group">
+                        <label for="fullname">الاسم الكامل</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" id="password" name="password" required onkeyup="checkPasswordStrength()">
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="password-strength-bar"></div>
+                        </div>
+                        <div class="password-strength-text" id="password-strength-text"></div>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="checkbox" id="terms-agree" required>
+                            <span>أوافق على <a href="terms.html" target="_blank">الشروط والأحكام</a> و <a href="privacy-policy.html" target="_blank">سياسة الخصوصية</a></span>
+                        </label>
+                        <div class="error-message"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn">إنشاء حساب</button>
+                </form>
+                
+                <div class="auth-separator">
+                    <hr>
+                    <span>أو</span>
+                    <hr>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-login-btn facebook-btn" onclick="socialLogin('facebook')">
+                        <i class="fab fa-facebook-f" style="margin-left: 10px;"></i> فيسبوك
+                    </button>
+                    <button class="social-login-btn google-btn" onclick="socialLogin('google')">
+                        <i class="fab fa-google" style="margin-left: 10px;"></i> جوجل
+                    </button>
+                </div>
+                
+                <div class="auth-links">
+                    <p>لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>أحذية أنيقة</h2>
+                    <p>أفضل متجر للأحذية العصرية والأنيقة</p>
+                </div>
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                        <li><a href="privacy-policy.html">سياسة الخصوصية</a></li>
+                        <li><a href="terms.html">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>اتصل بنا</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> شارع الحسن الثاني، الرباط، المغرب</p>
+                    <p><i class="fas fa-phone"></i> +212-5XX-XXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@elegantshoes.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>تابعنا</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

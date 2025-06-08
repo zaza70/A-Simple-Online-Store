@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - أحذية أنيقة</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .contact-header p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info-container {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+
+        .contact-form h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .captcha-container {
+            margin-bottom: 20px;
+        }
+
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .captcha-image {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-left: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .captcha-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.05),
+                rgba(0, 0, 0, 0.05) 10px,
+                rgba(0, 0, 0, 0) 10px,
+                rgba(0, 0, 0, 0) 20px
+            );
+        }
+
+        .refresh-captcha {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .refresh-captcha:hover {
+            color: #2980b9;
+        }
+
+        .captcha-input {
+            width: 150px;
+        }
+
+        .submit-btn {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .contact-info {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+
+        .contact-info h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-left: 15px;
+        }
+
+        .info-content {
+            flex: 1;
+        }
+
+        .info-content h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .info-content p {
+            margin: 0;
+            color: #555;
+        }
+
+        .social-links-contact {
+            margin-top: 30px;
+        }
+
+        .social-links-contact h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3498db;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .map-container {
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +971 123 456 789</span>
+                    <span><i class="fas fa-envelope"></i> info@elegantshoes.com</span>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>أحذية أنيقة</h1>
+                    </a>
+                </div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="menu">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="shop.html">المتجر</a></li>
+                    <li><a href="categories.html">التصنيفات</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html" class="active">اتصل بنا</a></li>
+                </ul>
+                <div class="header-icons">
+                    <a href="search.html" class="search-icon"><i class="fas fa-search"></i></a>
+                    <a href="account.html" class="account-icon"><i class="fas fa-user"></i></a>
+                    <a href="favorites.html" class="favorites-icon"><i class="fas fa-heart"></i></a>
+                    <a href="cart.html" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contact Content -->
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>اتصل بنا</h1>
+            <p>نحن هنا للإجابة على جميع استفساراتك</p>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-form-container">
+                <div class="contact-form">
+                    <div class="success-message" id="success-message">
+                        تم إرسال رسالتك بنجاح! سنتواصل معك قريبًا.
+                    </div>
+                    <div class="error-message" id="error-message">
+                        حدث خطأ أثناء إرسال رسالتك. يرجى المحاولة مرة أخرى.
+                    </div>
+
+                    <h2>أرسل لنا رسالة</h2>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل *</label>
+                            <input type="text" id="name" name="name" class="form-control" required data-validate="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني *</label>
+                            <input type="email" id="email" name="email" class="form-control" required data-validate="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" data-validate="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">الموضوع *</label>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">الرسالة *</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="captcha-container">
+                            <label>التحقق الأمني *</label>
+                            <div class="captcha-box">
+                                <div class="captcha-image" id="captcha-image">XYZ123</div>
+                                <button type="button" class="refresh-captcha" id="refresh-captcha">
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                            </div>
+                            <input type="text" id="captcha-input" name="captcha" class="form-control captcha-input" placeholder="أدخل الرمز" required>
+                        </div>
+
+                        <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="contact-info-container">
+                <div class="contact-info">
+                    <h2>معلومات الاتصال</h2>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>العنوان</h3>
+                            <p>شارع الحسن الثاني، الدار البيضاء، المغرب</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>الهاتف</h3>
+                            <p>+971 123 456 789</p>
+                            <p>+971 987 654 321</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>البريد الإلكتروني</h3>
+                            <p>info@elegantshoes.com</p>
+                            <p>support@elegantshoes.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>ساعات العمل</h3>
+                            <p>الأحد - الخميس: 9:00 صباحًا - 8:00 مساءً</p>
+                            <p>الجمعة - السبت: 10:00 صباحًا - 6:00 مساءً</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links-contact">
+                        <h3>تابعنا على</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.846447831147!2d-7.6192733!3d33.5731104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d282e9c7dd03%3A0x42f2d25d5cf3ef7d!2sHassan%20II%20Mosque!5e0!3m2!1sen!2sma!4v1623456789012!5m2!1sen!2sma" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>أحذية أنيقة</h3>
+                    <p>متجرك المفضل للأحذية الأنيقة والعصرية بأفضل الأسعار وأعلى جودة.</p>
+                    <div class="contact">
+                        <p><i class="fas fa-map-marker-alt"></i> شارع الحسن الثاني، الدار البيضاء</p>
+                        <p><i class="fas fa-phone"></i> +971 123 456 789</p>
+                        <p><i class="fas fa-envelope"></i> info@elegantshoes.com</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="shop.html">المتجر</a></li>
+                        <li><a href="categories.html">التصنيفات</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section links">
+                    <h3>خدمة العملاء</h3>
+                    <ul>
+                        <li><a href="account.html">حسابي</a></li>
+                        <li><a href="orders.html">تتبع الطلبات</a></li>
+                        <li><a href="wishlist.html">قائمة الرغبات</a></li>
+                        <li><a href="newsletter.html">النشرة الإخبارية</a></li>
+                        <li><a href="returns.html">الإرجاع والاستبدال</a></li>
+                        <li><a href="shipping.html">سياسة الشحن</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section newsletter">
+                    <h3>النشرة الإخبارية</h3>
+                    <p>اشترك في نشرتنا الإخبارية للحصول على آخر العروض والتخفيضات.</p>
+                    <form action="#" method="post">
+                        <input type="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+                        <button type="submit" class="btn">اشترك</button>
+                    </form>
+                    <div class="payment-methods">
+                        <h4>طرق الدفع</h4>
+                        <img src="img/payment-methods.png" alt="طرق الدفع">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+                <div class="footer-bottom-links">
+                    <a href="terms.html">شروط الاستخدام</a>
+                    <a href="privacy-policy.html">سياسة الخصوصية</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate random captcha
+            function generateCaptcha() {
+                const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+                let captcha = '';
+                for (let i = 0; i < 6; i++) {
+                    captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return captcha;
+            }
+
+            // Set captcha
+            const captchaImage = document.getElementById('captcha-image');
+            let currentCaptcha = generateCaptcha();
+            captchaImage.textContent = currentCaptcha;
+
+            // Refresh captcha
+            const refreshCaptchaBtn = document.getElementById('refresh-captcha');
+            refreshCaptchaBtn.addEventListener('click', function() {
+                currentCaptcha = generateCaptcha();
+                captchaImage.textContent = currentCaptcha;
+            });
+
+            // Initialize form validation
+            FormValidator.init('contact-form', {
+                language: 'ar',
+                onSuccess: function(form) {
+                    // Validate captcha
+                    const captchaInput = document.getElementById('captcha-input');
+                    const successMessage = document.getElementById('success-message');
+                    const errorMessage = document.getElementById('error-message');
+
+                    if (captchaInput.value !== currentCaptcha) {
+                        errorMessage.textContent = 'رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى.';
+                        errorMessage.style.display = 'block';
+                        successMessage.style.display = 'none';
+                        captchaInput.value = '';
+                        currentCaptcha = generateCaptcha();
+                        captchaImage.textContent = currentCaptcha;
+                        return;
+                    }
+
+                    // In a real application, you would send the form data to the server here
+                    // For this demo, we'll just show a success message
+
+                    // Reset form
+                    form.reset();
+
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+
+                    // Generate new captcha
+                    currentCaptcha = generateCaptcha();
+                    captchaImage.textContent = currentCaptcha;
+                },
+                onError: function(form) {
+                    // Hide success message
+                    document.getElementById('success-message').style.display = 'none';
+
+                    // Scroll to the first error
+                    const firstError = form.querySelector('.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstError.focus();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المفضلة - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .empty-favorites {
+            text-align: center;
+            padding: 50px 0;
+        }
+        
+        .empty-favorites i {
+            font-size: 60px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .empty-favorites h2 {
+            margin-bottom: 20px;
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #d35400;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .favorites-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html" class="favorites-icon">
+                            <i class="fas fa-heart"></i>
+                            <span class="favorites-count">0</span>
+                        </a>
+                    </li>
+                    <li class="search-container">
+                        <form action="search-results.html" method="get" class="search-form">
+                            <input type="text" name="query" placeholder="ابحث عن منتج..." class="search-input">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Favorites Section -->
+    <section class="cart-page">
+        <div class="container">
+            <div class="section-title">
+                <h2>المفضلة</h2>
+                <p>المنتجات المحفوظة في قائمة المفضلة</p>
+            </div>
+            
+            <div class="favorites-actions">
+                <div>
+                    <span>عدد المنتجات: <span id="favorites-count">0</span></span>
+                </div>
+                <div>
+                    <button id="clear-favorites" class="btn" style="background-color: #666;">حذف الكل</button>
+                </div>
+            </div>
+            
+            <div id="favorites-items">
+                <!-- Favorites items will be added dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>أحذية أنيقة</h3>
+                    <p style="color: #ddd; margin-bottom: 20px;">
+                        متجرك المفضل للأحذية العصرية والأنيقة بأسعار تنافسية
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدمة العملاء</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> شارع محمد الخامس، الدار البيضاء، المغرب</li>
+                        <li><i class="fas fa-phone" style="margin-left: 10px;"></i> +212 522 123 456</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 10px;"></i> info@moroccanshoes.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const favoritesContainer = document.getElementById('favorites-items');
+            const favoritesCountElement = document.getElementById('favorites-count');
+            const clearFavoritesButton = document.getElementById('clear-favorites');
+            
+            // Display favorites
+            function displayFavorites() {
+                if (favorites.length === 0) {
+                    favoritesContainer.innerHTML = `
+                        <div class="empty-favorites">
+                            <i class="far fa-heart"></i>
+                            <h2>قائمة المفضلة فارغة</h2>
+                            <p>لم تقم بإضافة أي منتجات إلى قائمة المفضلة بعد.</p>
+                            <a href="products.html" class="btn" style="margin-top: 20px;">تسوق الآن</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '<div class="products-grid">';
+                
+                favorites.forEach(productId => {
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        html += `
+                            <div class="product-card">
+                                <div class="product-img">
+                                    <img src="${product.image}" alt="${product.name}">
+                                    <div class="product-actions">
+                                        <button class="favorite-btn active" data-id="${product.id}">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="compare-btn" data-id="${product.id}">
+                                            <i class="fas fa-exchange-alt"></i> إضافة للمقارنة
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <div class="product-price">${product.price} درهم</div>
+                                    <div class="product-buttons">
+                                        <a href="product-details.html?id=${product.id}" class="btn">عرض التفاصيل</a>
+                                        <button class="add-to-cart-quick" data-id="${product.id}">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                html += '</div>';
+                favoritesContainer.innerHTML = html;
+                
+                // Update count
+                favoritesCountElement.textContent = favorites.length;
+                
+                // Add event listeners
+                const favoriteButtons = favoritesContainer.querySelectorAll('.favorite-btn');
+                favoriteButtons.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.dataset.id);
+                        toggleFavorite(productId, this);
+                        displayFavorites();
+                    });
+                });
+                
+                const quickAddButtons = favoritesContainer.querySelectorAll('.add-to-cart-quick');
+                quickAddButtons.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const productId = parseInt(this.dataset.id);
+                        const product = products.find(p => p.id === productId);
+                        if (product) {
+                            addToCart(product, product.sizes[0], 1);
+                        }
+                    });
+                });
+            }
+            
+            // Clear all favorites
+            clearFavoritesButton.addEventListener('click', function() {
+                if (confirm('هل أنت متأكد من حذف جميع المنتجات من المفضلة؟')) {
+                    favorites = [];
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    displayFavorites();
+                    updateFavoritesCount();
+                }
+            });
+            
+            // Initialize
+            displayFavorites();
+        });
+    </script>
+</body>
+</html>

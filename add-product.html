@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة منتج جديد - أحذية أنيقة</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .product-form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .image-upload-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .image-upload-box {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-upload-box:hover {
+            border-color: #3498db;
+        }
+        
+        .image-upload-box i {
+            font-size: 30px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        .image-upload-box span {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .image-upload-box input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-preview .remove-image {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 25px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #e74c3c;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .image-preview .remove-image:hover {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+        
+        .image-info {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .compression-info {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        
+        .compression-info .badge {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+        
+        .variants-container {
+            margin-bottom: 20px;
+        }
+        
+        .variant-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .variant-row .form-control {
+            flex: 1;
+        }
+        
+        .variant-row .remove-variant {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        .variant-row .remove-variant:hover {
+            color: #c0392b;
+        }
+        
+        .add-variant-btn {
+            background: none;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            color: #3498db;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .add-variant-btn:hover {
+            border-color: #3498db;
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e5e5e5;
+        }
+        
+        .progress-container {
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>أحذية أنيقة</h2>
+                <p>لوحة التحكم</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html"><i class="fas fa-tachometer-alt"></i> الرئيسية</a>
+                    </li>
+                    <li class="active">
+                        <a href="products.html"><i class="fas fa-box"></i> المنتجات</a>
+                    </li>
+                    <li>
+                        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+                    </li>
+                    <li>
+                        <a href="users.html"><i class="fas fa-users"></i> المستخدمين</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html"><i class="fas fa-warehouse"></i> المخزون</a>
+                    </li>
+                    <li>
+                        <a href="coupons.html"><i class="fas fa-tags"></i> الكوبونات</a>
+                    </li>
+                    <li>
+                        <a href="analytics.html"><i class="fas fa-chart-bar"></i> التحليلات</a>
+                    </li>
+                    <li>
+                        <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> زيارة المتجر</a>
+                <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+                    <h1>إضافة منتج جديد</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <img src="img/admin-avatar.png" alt="Admin Avatar">
+                        <span>مرحبًا، المدير</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="product-form-container">
+                    <div class="form-header">
+                        <h2 class="form-title">معلومات المنتج</h2>
+                    </div>
+                    
+                    <form id="product-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product-name">اسم المنتج *</label>
+                                <input type="text" id="product-name" name="name" class="form-control" required data-validate="name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-sku">رمز المنتج (SKU) *</label>
+                                <input type="text" id="product-sku" name="sku" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product-category">التصنيف *</label>
+                                <select id="product-category" name="category" class="form-control" required>
+                                    <option value="">اختر التصنيف</option>
+                                    <option value="رجالي">أحذية رجالية</option>
+                                    <option value="نسائي">أحذية نسائية</option>
+                                    <option value="أطفال">أحذية أطفال</option>
+                                    <option value="رياضي">أحذية رياضية</option>
+                                    <option value="رسمي">أحذية رسمية</option>
+                                    <option value="كاجوال">أحذية كاجوال</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-brand">الماركة</label>
+                                <input type="text" id="product-brand" name="brand" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product-price">السعر *</label>
+                                <input type="number" id="product-price" name="price" class="form-control" min="0" step="0.01" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-sale-price">سعر العرض</label>
+                                <input type="number" id="product-sale-price" name="sale_price" class="form-control" min="0" step="0.01">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-stock">المخزون *</label>
+                                <input type="number" id="product-stock" name="stock" class="form-control" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="product-description">وصف المنتج *</label>
+                            <textarea id="product-description" name="description" class="form-control" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>صور المنتج *</label>
+                            <div class="image-upload-container" id="image-upload-container">
+                                <div class="image-upload-box" id="main-image-upload">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>الصورة الرئيسية</span>
+                                    <input type="file" id="main-image-input" accept="image/*" required>
+                                </div>
+                                
+                                <div class="image-preview" id="main-image-preview" style="display: none;">
+                                    <img id="main-image-preview-img" src="#" alt="صورة المنتج">
+                                    <div class="remove-image" id="remove-main-image"><i class="fas fa-times"></i></div>
+                                    <div class="image-info" id="main-image-info"></div>
+                                    <div class="compression-info" id="main-image-compression" style="display: none;">
+                                        <span class="badge">تم الضغط</span>
+                                        <span id="main-image-compression-ratio"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="image-upload-box">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>صورة إضافية</span>
+                                    <input type="file" id="additional-image-1" accept="image/*">
+                                </div>
+                                
+                                <div class="image-upload-box">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>صورة إضافية</span>
+                                    <input type="file" id="additional-image-2" accept="image/*">
+                                </div>
+                                
+                                <div class="image-upload-box">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>صورة إضافية</span>
+                                    <input type="file" id="additional-image-3" accept="image/*">
+                                </div>
+                            </div>
+                            
+                            <div class="progress-container" id="upload-progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="upload-progress-bar"></div>
+                                </div>
+                                <div class="progress-text" id="upload-progress-text">جاري معالجة الصور...</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>المقاسات المتوفرة</label>
+                            <div class="variants-container" id="variants-container">
+                                <div class="variant-row">
+                                    <input type="text" name="size[]" class="form-control" placeholder="المقاس (مثال: 42)">
+                                    <input type="number" name="size_stock[]" class="form-control" placeholder="المخزون" min="0">
+                                    <button type="button" class="remove-variant"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <button type="button" class="add-variant-btn" id="add-variant-btn">
+                                <i class="fas fa-plus"></i> إضافة مقاس جديد
+                            </button>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="cancel-btn">إلغاء</button>
+                            <button type="submit" class="btn btn-primary" id="save-btn">حفظ المنتج</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/image-compressor.js"></script>
+    <script src="../js/form-validation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize form validation
+            FormValidator.init('product-form', {
+                language: 'ar',
+                onSuccess: function(form) {
+                    saveProduct(form);
+                }
+            });
+            
+            // Initialize main image upload with compression
+            const mainImageInput = document.getElementById('main-image-input');
+            const mainImagePreview = document.getElementById('main-image-preview');
+            const mainImagePreviewImg = document.getElementById('main-image-preview-img');
+            const mainImageInfo = document.getElementById('main-image-info');
+            const mainImageCompression = document.getElementById('main-image-compression');
+            const mainImageCompressionRatio = document.getElementById('main-image-compression-ratio');
+            const removeMainImage = document.getElementById('remove-main-image');
+            const progressContainer = document.getElementById('upload-progress-container');
+            const progressBar = document.getElementById('upload-progress-bar');
+            const progressText = document.getElementById('upload-progress-text');
+            
+            let mainImageFile = null;
+            
+            mainImageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                
+                if (!file) return;
+                
+                // Show progress
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '0%';
+                progressText.textContent = 'جاري معالجة الصورة...';
+                
+                // Compress image
+                ImageCompressor.compress(file, {
+                    maxWidth: 1200,
+                    maxHeight: 1200,
+                    quality: 0.8,
+                    onProgress: function(progress) {
+                        progressBar.style.width = `${progress * 100}%`;
+                    },
+                    onSuccess: function(result) {
+                        // Store compressed file
+                        mainImageFile = result.file;
+                        
+                        // Create object URL
+                        const objectUrl = URL.createObjectURL(result.file);
+                        
+                        // Update preview
+                        mainImagePreviewImg.src = objectUrl;
+                        mainImagePreview.style.display = 'block';
+                        
+                        // Update info
+                        mainImageInfo.textContent = `${result.width}x${result.height} - ${ImageCompressor.formatFileSize(result.compressedSize)}`;
+                        
+                        // Show compression info if significant compression achieved
+                        if (result.compressionRatio > 1.1) {
+                            mainImageCompression.style.display = 'flex';
+                            mainImageCompressionRatio.textContent = `تم تقليل الحجم بنسبة ${Math.round((1 - 1/result.compressionRatio) * 100)}%`;
+                        } else {
+                            mainImageCompression.style.display = 'none';
+                        }
+                        
+                        // Hide progress
+                        progressContainer.style.display = 'none';
+                    },
+                    onError: function(error) {
+                        console.error('Error compressing image:', error);
+                        
+                        // Hide progress
+                        progressContainer.style.display = 'none';
+                        
+                        // Show original image without compression
+                        const objectUrl = URL.createObjectURL(file);
+                        mainImagePreviewImg.src = objectUrl;
+                        mainImagePreview.style.display = 'block';
+                        mainImageInfo.textContent = `${ImageCompressor.formatFileSize(file.size)}`;
+                        mainImageCompression.style.display = 'none';
+                        
+                        // Store original file
+                        mainImageFile = file;
+                    }
+                });
+            });
+            
+            // Remove main image
+            removeMainImage.addEventListener('click', function() {
+                mainImagePreview.style.display = 'none';
+                mainImageInput.value = '';
+                mainImageFile = null;
+            });
+            
+            // Add variant button
+            const addVariantBtn = document.getElementById('add-variant-btn');
+            const variantsContainer = document.getElementById('variants-container');
+            
+            addVariantBtn.addEventListener('click', function() {
+                const variantRow = document.createElement('div');
+                variantRow.className = 'variant-row';
+                variantRow.innerHTML = `
+                    <input type="text" name="size[]" class="form-control" placeholder="المقاس (مثال: 42)">
+                    <input type="number" name="size_stock[]" class="form-control" placeholder="المخزون" min="0">
+                    <button type="button" class="remove-variant"><i class="fas fa-trash"></i></button>
+                `;
+                
+                variantsContainer.appendChild(variantRow);
+                
+                // Add event listener to remove button
+                const removeBtn = variantRow.querySelector('.remove-variant');
+                removeBtn.addEventListener('click', function() {
+                    variantRow.remove();
+                });
+            });
+            
+            // Add event listeners to existing remove buttons
+            const removeVariantBtns = document.querySelectorAll('.remove-variant');
+            removeVariantBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.variant-row').remove();
+                });
+            });
+            
+            // Cancel button
+            const cancelBtn = document.getElementById('cancel-btn');
+            cancelBtn.addEventListener('click', function() {
+                if (confirm('هل أنت متأكد من إلغاء إضافة المنتج؟')) {
+                    window.location.href = 'products.html';
+                }
+            });
+            
+            // Save product function
+            async function saveProduct(form) {
+                try {
+                    // Show loading
+                    const saveBtn = document.getElementById('save-btn');
+                    saveBtn.disabled = true;
+                    saveBtn.textContent = 'جاري الحفظ...';
+                    
+                    // Get form data
+                    const formData = new FormData(form);
+                    
+                    // Create product object
+                    const product = {
+                        name: formData.get('name'),
+                        sku: formData.get('sku'),
+                        category: formData.get('category'),
+                        brand: formData.get('brand') || null,
+                        price: parseFloat(formData.get('price')),
+                        sale_price: formData.get('sale_price') ? parseFloat(formData.get('sale_price')) : null,
+                        stock: parseInt(formData.get('stock')),
+                        description: formData.get('description'),
+                        created_at: new Date().toISOString(),
+                        updated_at: new Date().toISOString()
+                    };
+                    
+                    // Check if main image exists
+                    if (!mainImageFile) {
+                        alert('الرجاء إضافة صورة رئيسية للمنتج');
+                        saveBtn.disabled = false;
+                        saveBtn.textContent = 'حفظ المنتج';
+                        return;
+                    }
+                    
+                    // In a real application, you would upload the image to a storage service
+                    // and save the URL in the product object
+                    // For this demo, we'll just simulate it
+                    
+                    // Simulate image upload
+                    progressContainer.style.display = 'block';
+                    progressBar.style.width = '0%';
+                    progressText.textContent = 'جاري رفع الصور...';
+                    
+                    // Simulate upload progress
+                    let progress = 0;
+                    const interval = setInterval(() => {
+                        progress += 10;
+                        progressBar.style.width = `${progress}%`;
+                        
+                        if (progress >= 100) {
+                            clearInterval(interval);
+                            
+                            // Simulate API call to save product
+                            setTimeout(() => {
+                                // Hide progress
+                                progressContainer.style.display = 'none';
+                                
+                                // Show success message
+                                alert('تم حفظ المنتج بنجاح');
+                                
+                                // Redirect to products page
+                                window.location.href = 'products.html';
+                            }, 500);
+                        }
+                    }, 200);
+                } catch (error) {
+                    console.error('Error saving product:', error);
+                    alert('حدث خطأ أثناء حفظ المنتج');
+                    
+                    // Reset button
+                    const saveBtn = document.getElementById('save-btn');
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = 'حفظ المنتج';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

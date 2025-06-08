@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة التسوق - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #d35400;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .empty-cart i {
+            font-size: 60px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart h2 {
+            margin-bottom: 20px;
+        }
+
+        .coupon {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .coupon input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .coupon button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart-page">
+        <div class="container">
+            <div class="section-title">
+                <h2>سلة التسوق</h2>
+                <p>مراجعة المنتجات المضافة إلى سلة التسوق</p>
+            </div>
+
+            <div id="cart-items">
+                <!-- Cart items will be added dynamically -->
+            </div>
+
+            <div class="cart-actions" style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 30px;">
+                <div style="flex: 1; min-width: 300px; margin-bottom: 20px;">
+                    <div class="coupon">
+                        <input type="text" id="coupon-code" placeholder="كود الخصم">
+                        <button id="apply-coupon">تطبيق</button>
+                        <div id="coupon-message" style="margin-top: 5px; font-size: 14px; color: #e74c3c; display: none;"></div>
+                    </div>
+                    <a href="products.html" class="btn" style="background-color: #333;">مواصلة التسوق</a>
+                </div>
+
+                <div class="cart-summary" style="flex: 1; min-width: 300px;">
+                    <h3 style="margin-bottom: 20px;">ملخص الطلب</h3>
+                    <div class="cart-summary-row">
+                        <span>المجموع الفرعي:</span>
+                        <span id="subtotal">0 درهم</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span>الشحن:</span>
+                        <span>مجاني</span>
+                    </div>
+                    <div class="cart-summary-row discount-row" style="display: none; color: #e74c3c;">
+                        <span>الخصم:</span>
+                        <span id="discount">0 درهم</span>
+                    </div>
+                    <div class="cart-summary-row cart-total">
+                        <span>الإجمالي:</span>
+                        <span id="total">0 درهم</span>
+                    </div>
+                    <a href="checkout.html" class="btn" style="width: 100%; margin-top: 20px; text-align: center;">إتمام الشراء</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>أحذية أنيقة</h3>
+                    <p style="color: #ddd; margin-bottom: 20px;">
+                        متجرك المفضل للأحذية العصرية والأنيقة بأسعار تنافسية
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدمة العملاء</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> شارع محمد الخامس، الدار البيضاء، المغرب</li>
+                        <li><i class="fas fa-phone" style="margin-left: 10px;"></i> +212 522 123 456</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 10px;"></i> info@moroccanshoes.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if cart is empty
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                const cartItemsContainer = document.getElementById('cart-items');
+                const cartActions = document.querySelector('.cart-actions');
+
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h2>سلة التسوق فارغة</h2>
+                        <p>لم تقم بإضافة أي منتجات إلى سلة التسوق بعد.</p>
+                        <a href="products.html" class="btn" style="margin-top: 20px;">تسوق الآن</a>
+                    </div>
+                `;
+
+                cartActions.style.display = 'none';
+            }
+
+            // Available coupons
+            const availableCoupons = [
+                { code: 'WELCOME10', discount: 0.1, minAmount: 0, maxDiscount: 0, expiryDate: '2025-12-31' },
+                { code: 'SUMMER20', discount: 0.2, minAmount: 500, maxDiscount: 200, expiryDate: '2025-08-31' },
+                { code: 'SHOES15', discount: 0.15, minAmount: 300, maxDiscount: 150, expiryDate: '2025-12-31' },
+                { code: 'FREESHIP', discount: 0, minAmount: 0, maxDiscount: 0, freeShipping: true, expiryDate: '2025-12-31' }
+            ];
+
+            // Get applied coupon from localStorage
+            let appliedCoupon = JSON.parse(localStorage.getItem('appliedCoupon')) || null;
+
+            // Apply coupon button
+            const couponButton = document.getElementById('apply-coupon');
+            const couponInput = document.getElementById('coupon-code');
+            const couponMessage = document.getElementById('coupon-message');
+            const discountRow = document.querySelector('.discount-row');
+            const discountElement = document.getElementById('discount');
+
+            if (couponButton) {
+                // If there's an applied coupon, show it
+                if (appliedCoupon) {
+                    couponInput.value = appliedCoupon.code;
+                    couponInput.disabled = true;
+                    couponButton.textContent = 'إلغاء';
+                    couponMessage.textContent = `تم تطبيق الخصم: ${appliedCoupon.discount * 100}%`;
+                    couponMessage.style.color = '#2ecc71';
+                    couponMessage.style.display = 'block';
+
+                    // Apply discount to cart
+                    applyDiscount(appliedCoupon);
+                }
+
+                couponButton.addEventListener('click', function() {
+                    // If there's already an applied coupon, remove it
+                    if (appliedCoupon) {
+                        localStorage.removeItem('appliedCoupon');
+                        appliedCoupon = null;
+
+                        couponInput.value = '';
+                        couponInput.disabled = false;
+                        couponButton.textContent = 'تطبيق';
+                        couponMessage.style.display = 'none';
+                        discountRow.style.display = 'none';
+
+                        // Update cart totals
+                        updateCartTotals();
+                        return;
+                    }
+
+                    const couponCode = couponInput.value.trim().toUpperCase();
+
+                    if (couponCode === '') {
+                        couponMessage.textContent = 'الرجاء إدخال كود الخصم';
+                        couponMessage.style.display = 'block';
+                        return;
+                    }
+
+                    // Find coupon
+                    const coupon = availableCoupons.find(c => c.code === couponCode);
+
+                    if (!coupon) {
+                        couponMessage.textContent = 'عذرًا، كود الخصم غير صالح';
+                        couponMessage.style.display = 'block';
+                        return;
+                    }
+
+                    // Check if coupon is expired
+                    const today = new Date();
+                    const expiryDate = new Date(coupon.expiryDate);
+
+                    if (today > expiryDate) {
+                        couponMessage.textContent = 'عذرًا، كود الخصم منتهي الصلاحية';
+                        couponMessage.style.display = 'block';
+                        return;
+                    }
+
+                    // Check minimum amount
+                    const subtotal = calculateSubtotal();
+
+                    if (subtotal < coupon.minAmount) {
+                        couponMessage.textContent = `عذرًا، الحد الأدنى للطلب هو ${coupon.minAmount} درهم`;
+                        couponMessage.style.display = 'block';
+                        return;
+                    }
+
+                    // Apply coupon
+                    appliedCoupon = coupon;
+                    localStorage.setItem('appliedCoupon', JSON.stringify(appliedCoupon));
+
+                    couponInput.disabled = true;
+                    couponButton.textContent = 'إلغاء';
+                    couponMessage.textContent = `تم تطبيق الخصم: ${appliedCoupon.discount * 100}%`;
+                    couponMessage.style.color = '#2ecc71';
+                    couponMessage.style.display = 'block';
+
+                    // Apply discount to cart
+                    applyDiscount(appliedCoupon);
+                });
+            }
+
+            // Apply discount to cart
+            function applyDiscount(coupon) {
+                const subtotal = calculateSubtotal();
+                let discountAmount = subtotal * coupon.discount;
+
+                // Check if there's a maximum discount
+                if (coupon.maxDiscount > 0 && discountAmount > coupon.maxDiscount) {
+                    discountAmount = coupon.maxDiscount;
+                }
+
+                // Update discount row
+                discountElement.textContent = `- ${discountAmount.toFixed(2)} درهم`;
+                discountRow.style.display = 'flex';
+
+                // Update cart totals
+                updateCartTotals();
+            }
+
+            // Calculate subtotal
+            function calculateSubtotal() {
+                let subtotal = 0;
+
+                cart.forEach(item => {
+                    subtotal += item.price * item.quantity;
+                });
+
+                return subtotal;
+            }
+
+            // Update cart totals
+            function updateCartTotals() {
+                const subtotal = calculateSubtotal();
+                const subtotalElement = document.getElementById('subtotal');
+                const totalElement = document.getElementById('total');
+
+                subtotalElement.textContent = `${subtotal.toFixed(2)} درهم`;
+
+                let total = subtotal;
+
+                // Apply discount if there's an applied coupon
+                if (appliedCoupon) {
+                    let discountAmount = subtotal * appliedCoupon.discount;
+
+                    // Check if there's a maximum discount
+                    if (appliedCoupon.maxDiscount > 0 && discountAmount > appliedCoupon.maxDiscount) {
+                        discountAmount = appliedCoupon.maxDiscount;
+                    }
+
+                    total -= discountAmount;
+                }
+
+                totalElement.textContent = `${total.toFixed(2)} درهم`;
+            }
+
+            // Update cart totals on page load
+            updateCartTotals();
+        });
+    </script>
+</body>
+</html>

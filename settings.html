@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - أحذية أنيقة</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        /* Settings Page Specific Styles */
+        .settings-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: -1px;
+        }
+        
+        .tab-btn.active {
+            border-bottom-color: #3498db;
+            color: #3498db;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .settings-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .settings-card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .form-check input {
+            margin-left: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e5e5e5;
+        }
+        
+        .settings-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method.active {
+            border-color: #3498db;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .payment-method img {
+            height: 30px;
+            margin-left: 10px;
+        }
+        
+        .shipping-methods {
+            margin-top: 10px;
+        }
+        
+        .shipping-method {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .shipping-method-info {
+            flex: 1;
+        }
+        
+        .shipping-method-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .shipping-method-price {
+            color: #777;
+        }
+        
+        .shipping-method-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .edit-btn {
+            color: #3498db;
+        }
+        
+        .edit-btn:hover {
+            color: #2980b9;
+        }
+        
+        .delete-btn {
+            color: #e74c3c;
+        }
+        
+        .delete-btn:hover {
+            color: #c0392b;
+        }
+        
+        .add-btn {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            width: 100%;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-btn i {
+            margin-left: 10px;
+            color: #3498db;
+        }
+        
+        .add-btn:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>أحذية أنيقة</h2>
+                <p>لوحة التحكم</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html"><i class="fas fa-tachometer-alt"></i> الرئيسية</a>
+                    </li>
+                    <li>
+                        <a href="products.html"><i class="fas fa-box"></i> المنتجات</a>
+                    </li>
+                    <li>
+                        <a href="orders.html"><i class="fas fa-shopping-cart"></i> الطلبات</a>
+                    </li>
+                    <li>
+                        <a href="users.html"><i class="fas fa-users"></i> المستخدمين</a>
+                    </li>
+                    <li>
+                        <a href="inventory.html"><i class="fas fa-warehouse"></i> المخزون</a>
+                    </li>
+                    <li>
+                        <a href="coupons.html"><i class="fas fa-tags"></i> الكوبونات</a>
+                    </li>
+                    <li>
+                        <a href="analytics.html"><i class="fas fa-chart-bar"></i> التحليلات</a>
+                    </li>
+                    <li class="active">
+                        <a href="settings.html"><i class="fas fa-cog"></i> الإعدادات</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> زيارة المتجر</a>
+                <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+                    <h1>الإعدادات</h1>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <img src="img/admin-avatar.png" alt="Admin Avatar">
+                        <span>مرحبًا، المدير</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="settings-tabs">
+                    <button class="tab-btn active" data-tab="general">عام</button>
+                    <button class="tab-btn" data-tab="store">المتجر</button>
+                    <button class="tab-btn" data-tab="payment">الدفع</button>
+                    <button class="tab-btn" data-tab="shipping">الشحن</button>
+                    <button class="tab-btn" data-tab="email">البريد الإلكتروني</button>
+                    <button class="tab-btn" data-tab="security">الأمان</button>
+                </div>
+
+                <!-- General Settings -->
+                <div class="tab-content active" id="general-tab">
+                    <div class="settings-card">
+                        <h2>إعدادات عامة</h2>
+                        <form id="general-settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="site-name">اسم الموقع</label>
+                                    <input type="text" id="site-name" class="form-control" value="أحذية أنيقة">
+                                </div>
+                                <div class="form-group">
+                                    <label for="site-description">وصف الموقع</label>
+                                    <input type="text" id="site-description" class="form-control" value="متجر أحذية أنيقة - أفضل الأحذية بأفضل الأسعار">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="site-logo">شعار الموقع</label>
+                                    <input type="file" id="site-logo" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="site-favicon">أيقونة الموقع</label>
+                                    <input type="file" id="site-favicon" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="admin-email">البريد الإلكتروني للإدارة</label>
+                                    <input type="email" id="admin-email" class="form-control" value="admin@elegantshoes.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email">البريد الإلكتروني للتواصل</label>
+                                    <input type="email" id="contact-email" class="form-control" value="contact@elegantshoes.com">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone-number">رقم الهاتف</label>
+                                    <input type="tel" id="phone-number" class="form-control" value="+212600000000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">العنوان</label>
+                                    <input type="text" id="address" class="form-control" value="شارع الحسن الثاني، الدار البيضاء، المغرب">
+                                </div>
+                            </div>
+                            <div class="settings-footer">
+                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Store Settings -->
+                <div class="tab-content" id="store-tab">
+                    <div class="settings-card">
+                        <h2>إعدادات المتجر</h2>
+                        <form id="store-settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="currency">العملة</label>
+                                    <select id="currency" class="form-control">
+                                        <option value="AED" selected>درهم إماراتي (AED)</option>
+                                        <option value="SAR">ريال سعودي (SAR)</option>
+                                        <option value="USD">دولار أمريكي (USD)</option>
+                                        <option value="EUR">يورو (EUR)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tax-rate">نسبة الضريبة (%)</label>
+                                    <input type="number" id="tax-rate" class="form-control" value="5" min="0" max="100" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="products-per-page">عدد المنتجات في الصفحة</label>
+                                    <input type="number" id="products-per-page" class="form-control" value="12" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="low-stock-threshold">حد المخزون المنخفض</label>
+                                    <input type="number" id="low-stock-threshold" class="form-control" value="5" min="1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="show-out-of-stock" checked>
+                                    <label for="show-out-of-stock">عرض المنتجات التي نفذت كميتها</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="enable-reviews" checked>
+                                    <label for="enable-reviews">تفعيل التقييمات والمراجعات</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="require-login-for-checkout" checked>
+                                    <label for="require-login-for-checkout">طلب تسجيل الدخول لإتمام الطلب</label>
+                                </div>
+                            </div>
+                            <div class="settings-footer">
+                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Payment Settings -->
+                <div class="tab-content" id="payment-tab">
+                    <div class="settings-card">
+                        <h2>إعدادات الدفع</h2>
+                        <form id="payment-settings-form">
+                            <div class="form-group">
+                                <label>طرق الدفع المتاحة</label>
+                                <div class="payment-methods">
+                                    <div class="payment-method active">
+                                        <img src="img/payment/cash.png" alt="Cash on Delivery">
+                                        <span>الدفع عند الاستلام</span>
+                                    </div>
+                                    <div class="payment-method active">
+                                        <img src="img/payment/credit-card.png" alt="Credit Card">
+                                        <span>بطاقة ائتمان</span>
+                                    </div>
+                                    <div class="payment-method">
+                                        <img src="img/payment/paypal.png" alt="PayPal">
+                                        <span>PayPal</span>
+                                    </div>
+                                    <div class="payment-method">
+                                        <img src="img/payment/apple-pay.png" alt="Apple Pay">
+                                        <span>Apple Pay</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="stripe-public-key">مفتاح Stripe العام</label>
+                                    <input type="text" id="stripe-public-key" class="form-control" value="pk_test_51HZgU7J2oYvL8HhdwdIBQxGR5VzjLkwdqzC5vYvL8HhdwdIBQxGR5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stripe-secret-key">مفتاح Stripe السري</label>
+                                    <input type="password" id="stripe-secret-key" class="form-control" value="sk_test_51HZgU7J2oYvL8HhdwdIBQxGR5VzjLkwdqzC5vYvL8HhdwdIBQxGR5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="paypal-client-id">معرف عميل PayPal</label>
+                                    <input type="text" id="paypal-client-id" class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="paypal-secret">سر PayPal</label>
+                                    <input type="password" id="paypal-secret" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="settings-footer">
+                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Shipping Settings -->
+                <div class="tab-content" id="shipping-tab">
+                    <div class="settings-card">
+                        <h2>إعدادات الشحن</h2>
+                        <form id="shipping-settings-form">
+                            <div class="form-group">
+                                <label>طرق الشحن</label>
+                                <div class="shipping-methods">
+                                    <div class="shipping-method">
+                                        <div class="shipping-method-info">
+                                            <div class="shipping-method-name">شحن قياسي</div>
+                                            <div class="shipping-method-price">30.00 درهم</div>
+                                        </div>
+                                        <div class="shipping-method-actions">
+                                            <button type="button" class="action-btn edit-btn">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="action-btn delete-btn">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="shipping-method">
+                                        <div class="shipping-method-info">
+                                            <div class="shipping-method-name">شحن سريع</div>
+                                            <div class="shipping-method-price">50.00 درهم</div>
+                                        </div>
+                                        <div class="shipping-method-actions">
+                                            <button type="button" class="action-btn edit-btn">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="action-btn delete-btn">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="add-btn">
+                                        <i class="fas fa-plus"></i> إضافة طريقة شحن جديدة
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="free-shipping-threshold">حد الشحن المجاني</label>
+                                    <input type="number" id="free-shipping-threshold" class="form-control" value="500" min="0" step="0.01">
+                                    <small>0 = تعطيل الشحن المجاني</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-countries">الدول المتاحة للشحن</label>
+                                    <select id="shipping-countries" class="form-control" multiple>
+                                        <option value="AE" selected>الإمارات العربية المتحدة</option>
+                                        <option value="SA" selected>المملكة العربية السعودية</option>
+                                        <option value="KW" selected>الكويت</option>
+                                        <option value="QA" selected>قطر</option>
+                                        <option value="BH" selected>البحرين</option>
+                                        <option value="OM" selected>عمان</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="settings-footer">
+                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Email Settings -->
+                <div class="tab-content" id="email-tab">
+                    <div class="settings-card">
+                        <h2>إعدادات البريد الإلكتروني</h2>
+                        <form id="email-settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="smtp-host">مضيف SMTP</label>
+                                    <input type="text" id="smtp-host" class="form-control" value="smtp.gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-port">منفذ SMTP</label>
+                                    <input type="number" id="smtp-port" class="form-control" value="587">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="smtp-username">اسم مستخدم SMTP</label>
+                                    <input type="text" id="smtp-username" class="form-control" value="notifications@elegantshoes.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtp-password">كلمة مرور SMTP</label>
+                                    <input type="password" id="smtp-password" class="form-control" value="password">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email-from-name">اسم المرسل</label>
+                                    <input type="text" id="email-from-name" class="form-control" value="أحذية أنيقة">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email-from-address">عنوان المرسل</label>
+                                    <input type="email" id="email-from-address" class="form-control" value="notifications@elegantshoes.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="send-order-confirmation" checked>
+                                    <label for="send-order-confirmation">إرسال تأكيد الطلب</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="send-shipping-notification" checked>
+                                    <label for="send-shipping-notification">إرسال إشعار الشحن</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="send-admin-new-order" checked>
+                                    <label for="send-admin-new-order">إرسال إشعار للمدير عند وجود طلب جديد</label>
+                                </div>
+                            </div>
+                            <div class="settings-footer">
+                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="tab-content" id="security-tab">
+                    <div class="settings-card">
+                        <h2>إعدادات الأمان</h2>
+                        <form id="security-settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="admin-username">اسم المستخدم</label>
+                                    <input type="text" id="admin-username" class="form-control" value="admin">
+                                </div>
+                                <div class="form-group">
+                                    <label for="admin-password">كلمة المرور</label>
+                                    <input type="password" id="admin-password" class="form-control" placeholder="اترك فارغًا للاحتفاظ بكلمة المرور الحالية">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="confirm-password">تأكيد كلمة المرور</label>
+                                    <input type="password" id="confirm-password" class="form-control" placeholder="اترك فارغًا للاحتفاظ بكلمة المرور الحالية">
+                                </div>
+                                <div class="form-group">
+                                    <label for="two-factor-auth">المصادقة الثنائية</label>
+                                    <select id="two-factor-auth" class="form-control">
+                                        <option value="disabled" selected>معطلة</option>
+                                        <option value="email">البريد الإلكتروني</option>
+                                        <option value="sms">الرسائل النصية</option>
+                                        <option value="app">تطبيق المصادقة</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="enable-captcha" checked>
+                                    <label for="enable-captcha">تفعيل CAPTCHA في نماذج الموقع</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="enable-ssl" checked>
+                                    <label for="enable-ssl">تفعيل SSL (HTTPS)</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input type="checkbox" id="enable-ip-blocking">
+                                    <label for="enable-ip-blocking">تفعيل حظر عناوين IP المشبوهة</label>
+                                </div>
+                            </div>
+                            <div class="settings-footer">
+                                <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>

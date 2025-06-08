@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - لوحة التحكم</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .login-header h1 {
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #ecf0f1;
+        }
+
+        .login-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .form-control {
+            padding-right: 40px;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .back-to-store {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-to-store a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-to-store a:hover {
+            color: #2980b9;
+        }
+
+        .back-to-store a i {
+            margin-left: 5px;
+        }
+
+        /* Two-factor authentication styles */
+        .two-factor-form {
+            display: none;
+        }
+
+        .verification-code {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .verification-code input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .verification-code input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .resend-code {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .resend-code button {
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .resend-code button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>أحذية أنيقة</h1>
+            <p>تسجيل الدخول إلى لوحة التحكم</p>
+        </div>
+
+        <div class="login-form">
+            <div class="error-message" id="error-message"></div>
+            <div class="success-message" id="success-message"></div>
+
+            <!-- Login Form -->
+            <form id="login-form" onsubmit="return adminLogin(event)">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <div class="input-group">
+                        <input type="text" id="username" class="form-control" required>
+                        <span class="input-icon"><i class="fas fa-user"></i></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <div class="input-group">
+                        <input type="password" id="password" class="form-control" required>
+                        <span class="input-icon"><i class="fas fa-lock"></i></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">تسجيل الدخول</button>
+            </form>
+
+            <!-- Two-Factor Authentication Form -->
+            <form id="two-factor-form" class="two-factor-form" onsubmit="return verifyTwoFactor(event)">
+                <div class="form-group">
+                    <label>أدخل رمز التحقق</label>
+                    <p>تم إرسال رمز التحقق إلى تطبيق المصادقة الخاص بك.</p>
+
+                    <div class="verification-code">
+                        <input type="text" maxlength="1" class="code-input" data-index="1" required>
+                        <input type="text" maxlength="1" class="code-input" data-index="2" required>
+                        <input type="text" maxlength="1" class="code-input" data-index="3" required>
+                        <input type="text" maxlength="1" class="code-input" data-index="4" required>
+                        <input type="text" maxlength="1" class="code-input" data-index="5" required>
+                        <input type="text" maxlength="1" class="code-input" data-index="6" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn">تحقق</button>
+
+                <div class="resend-code">
+                    <button type="button" id="back-to-login">العودة إلى تسجيل الدخول</button>
+                </div>
+            </form>
+
+            <div class="back-to-store">
+                <a href="../index.html"><i class="fas fa-arrow-left"></i> العودة إلى المتجر</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for 2FA code inputs
+            const codeInputs = document.querySelectorAll('.code-input');
+
+            codeInputs.forEach((input, index) => {
+                // Auto-focus next input when a digit is entered
+                input.addEventListener('input', function() {
+                    if (this.value.length === 1) {
+                        const nextInput = document.querySelector(`.code-input[data-index="${parseInt(this.dataset.index) + 1}"]`);
+                        if (nextInput) {
+                            nextInput.focus();
+                        }
+                    }
+                });
+
+                // Handle backspace to go to previous input
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value.length === 0) {
+                        const prevInput = document.querySelector(`.code-input[data-index="${parseInt(this.dataset.index) - 1}"]`);
+                        if (prevInput) {
+                            prevInput.focus();
+                        }
+                    }
+                });
+            });
+
+            // Back to login button
+            const backToLoginBtn = document.getElementById('back-to-login');
+            if (backToLoginBtn) {
+                backToLoginBtn.addEventListener('click', function() {
+                    document.getElementById('login-form').style.display = 'block';
+                    document.getElementById('two-factor-form').style.display = 'none';
+                    document.getElementById('error-message').style.display = 'none';
+                });
+            }
+        });
+
+        // Override the adminLogin function
+        function adminLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Simple authentication for demo purposes
+            if (username === 'admin' && password === 'admin123') {
+                // Check if 2FA is enabled for this user
+                const hasTwoFactor = true; // In a real app, this would be checked from the database
+
+                if (hasTwoFactor) {
+                    // Show 2FA form
+                    document.getElementById('login-form').style.display = 'none';
+                    document.getElementById('two-factor-form').style.display = 'block';
+
+                    // Focus on first input
+                    document.querySelector('.code-input[data-index="1"]').focus();
+
+                    // Store credentials temporarily
+                    sessionStorage.setItem('temp_auth', JSON.stringify({
+                        username: username,
+                        timestamp: new Date().getTime()
+                    }));
+                } else {
+                    // Create admin session without 2FA
+                    const adminUser = {
+                        id: 1,
+                        username: 'admin',
+                        name: 'المدير',
+                        role: 'admin'
+                    };
+
+                    localStorage.setItem('adminSession', JSON.stringify(adminUser));
+
+                    // Redirect to dashboard
+                    window.location.href = 'index.html';
+                }
+            } else {
+                // Show error message
+                if (errorMessage) {
+                    errorMessage.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+                    errorMessage.style.display = 'block';
+                }
+            }
+
+            return false;
+        }
+
+        // Verify two-factor authentication code
+        function verifyTwoFactor(event) {
+            event.preventDefault();
+
+            // Get code from inputs
+            const codeInputs = document.querySelectorAll('.code-input');
+            let code = '';
+
+            codeInputs.forEach(input => {
+                code += input.value;
+            });
+
+            // Check if code is complete
+            if (code.length !== 6) {
+                document.getElementById('error-message').textContent = 'الرجاء إدخال رمز التحقق المكون من 6 أرقام';
+                document.getElementById('error-message').style.display = 'block';
+                return false;
+            }
+
+            // Get temp auth data
+            const tempAuth = JSON.parse(sessionStorage.getItem('temp_auth') || '{}');
+
+            // Check if temp auth is expired (10 minutes)
+            const now = new Date().getTime();
+            if (!tempAuth.timestamp || now - tempAuth.timestamp > 10 * 60 * 1000) {
+                document.getElementById('error-message').textContent = 'انتهت صلاحية الجلسة. الرجاء تسجيل الدخول مرة أخرى.';
+                document.getElementById('error-message').style.display = 'block';
+
+                // Show login form again
+                document.getElementById('login-form').style.display = 'block';
+                document.getElementById('two-factor-form').style.display = 'none';
+
+                // Clear temp auth
+                sessionStorage.removeItem('temp_auth');
+
+                return false;
+            }
+
+            // In a real app, you would verify the code with the server
+            // For this demo, we'll accept any 6-digit code
+            if (code === '123456') {
+                // Create admin session
+                const adminUser = {
+                    id: 1,
+                    username: tempAuth.username,
+                    name: 'المدير',
+                    role: 'admin'
+                };
+
+                localStorage.setItem('adminSession', JSON.stringify(adminUser));
+
+                // Clear temp auth
+                sessionStorage.removeItem('temp_auth');
+
+                // Redirect to dashboard
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('error-message').textContent = 'رمز التحقق غير صحيح. الرجاء المحاولة مرة أخرى.';
+                document.getElementById('error-message').style.display = 'block';
+
+                // Clear inputs
+                codeInputs.forEach(input => {
+                    input.value = '';
+                });
+
+                // Focus on first input
+                document.querySelector('.code-input[data-index="1"]').focus();
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html>

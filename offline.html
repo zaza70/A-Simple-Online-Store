@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غير متصل بالإنترنت - أحذية أنيقة</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+            direction: rtl;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .offline-container {
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #d35400;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            color: #d35400;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #d35400;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #e67e22;
+        }
+        
+        .tips {
+            margin-top: 30px;
+            text-align: right;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .tips h3 {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .tips ul {
+            list-style-position: inside;
+            margin-bottom: 20px;
+        }
+        
+        .tips li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+        </div>
+        <h1>أنت غير متصل بالإنترنت</h1>
+        <p>يبدو أنك غير متصل بالإنترنت حاليًا. بعض الميزات قد لا تعمل بشكل صحيح.</p>
+        <p>يمكنك تصفح الصفحات التي زرتها سابقًا، ولكن قد لا تتمكن من الوصول إلى محتوى جديد.</p>
+        
+        <a href="index.html" class="btn">العودة إلى الصفحة الرئيسية</a>
+        
+        <div class="tips">
+            <h3>نصائح للاتصال:</h3>
+            <ul>
+                <li>تحقق من اتصال الواي فاي أو بيانات الجوال.</li>
+                <li>تأكد من أن وضع الطيران غير مفعل.</li>
+                <li>حاول تحديث الصفحة عندما تكون متصلاً بالإنترنت.</li>
+            </ul>
+            <p>سيتم إعادة الاتصال تلقائيًا عند توفر الإنترنت.</p>
+        </div>
+    </div>
+</body>
+</html>

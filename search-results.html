@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج البحث - أحذية أنيقة 2025</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .search-summary {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .search-summary h3 {
+            margin-bottom: 10px;
+        }
+        
+        .search-query {
+            font-weight: bold;
+            color: #d35400;
+        }
+        
+        .search-count {
+            font-weight: bold;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 50px 0;
+        }
+        
+        .no-results i {
+            font-size: 60px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .no-results h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">أحذية <span>أنيقة</span></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="index.html#about">من نحن</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="favorites.html" class="favorites-icon">
+                            <i class="fas fa-heart"></i>
+                            <span class="favorites-count">0</span>
+                        </a>
+                    </li>
+                    <li class="search-container">
+                        <form action="search-results.html" method="get" class="search-form">
+                            <input type="text" name="query" placeholder="ابحث عن منتج..." class="search-input">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Search Results Section -->
+    <section class="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>نتائج البحث</h2>
+                <p>نتائج البحث عن المنتجات</p>
+            </div>
+            
+            <div class="search-summary">
+                <h3>نتائج البحث عن: <span class="search-query" id="search-query"></span></h3>
+                <p>تم العثور على <span class="search-count" id="search-count">0</span> منتج</p>
+            </div>
+            
+            <div id="search-results">
+                <!-- Search results will be added dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>أحذية أنيقة</h3>
+                    <p style="color: #ddd; margin-bottom: 20px;">
+                        متجرك المفضل للأحذية العصرية والأنيقة بأسعار تنافسية
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 18px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="index.html#about">من نحن</a></li>
+                        <li><a href="index.html#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>خدمة العملاء</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الإرجاع</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> شارع محمد الخامس، الدار البيضاء، المغرب</li>
+                        <li><i class="fas fa-phone" style="margin-left: 10px;"></i> +212 522 123 456</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 10px;"></i> info@moroccanshoes.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 أحذية أنيقة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchResultsContainer = document.getElementById('search-results');
+            const searchQueryElement = document.getElementById('search-query');
+            const searchCountElement = document.getElementById('search-count');
+            
+            // Get search query from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query') || '';
+            
+            // Display search query
+            searchQueryElement.textContent = query;
+            
+            // Search function
+            function searchProducts(query) {
+                if (!query) {
+                    return [];
+                }
+                
+                query = query.toLowerCase();
+                
+                return products.filter(product => {
+                    return (
+                        product.name.toLowerCase().includes(query) ||
+                        product.description.toLowerCase().includes(query)
+                    );
+                });
+            }
+            
+            // Display search results
+            function displaySearchResults(query) {
+                const results = searchProducts(query);
+                
+                // Update count
+                searchCountElement.textContent = results.length;
+                
+                if (results.length === 0) {
+                    searchResultsContainer.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <h2>لم يتم العثور على نتائج</h2>
+                            <p>لم نتمكن من العثور على أي منتجات تطابق بحثك "${query}".</p>
+                            <p>حاول البحث بكلمات مختلفة أو تصفح جميع المنتجات.</p>
+                            <a href="products.html" class="btn" style="margin-top: 20px;">عرض جميع المنتجات</a>
+                        </div>
+                    `;
+                } else {
+                    // Display products
+                    displayProducts(results, searchResultsContainer);
+                    
+                    // Add event listeners for favorite buttons
+                    const favoriteButtons = searchResultsContainer.querySelectorAll('.favorite-btn');
+                    favoriteButtons.forEach(btn => {
+                        const productId = parseInt(btn.dataset.id);
+                        if (favorites.includes(productId)) {
+                            btn.innerHTML = '<i class="fas fa-heart"></i>';
+                            btn.classList.add('active');
+                        }
+                        
+                        btn.addEventListener('click', function() {
+                            toggleFavorite(productId, this);
+                        });
+                    });
+                    
+                    // Add event listeners for quick add to cart
+                    const quickAddButtons = searchResultsContainer.querySelectorAll('.add-to-cart-quick');
+                    quickAddButtons.forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const productId = parseInt(this.dataset.id);
+                            const product = products.find(p => p.id === productId);
+                            if (product) {
+                                addToCart(product, product.sizes[0], 1);
+                            }
+                        });
+                    });
+                }
+            }
+            
+            // Initialize
+            displaySearchResults(query);
+        });
+    </script>
+</body>
+</html>
